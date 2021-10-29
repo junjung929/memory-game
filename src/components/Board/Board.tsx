@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card } from '../../types';
 import { cardImages } from '../../utils/constants';
 import Button from '../Button/Button';
@@ -22,6 +22,24 @@ const Board = (props: Props) => {
 
   const handleChoice = (card: Card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  };
+
+  // compare 2 selected cards
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        console.log('those cards match');
+      } else {
+        console.log('those cards do not match');
+      }
+      resetTurn();
+    }
+  }, [choiceOne, choiceTwo]);
+
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
   };
 
   return (

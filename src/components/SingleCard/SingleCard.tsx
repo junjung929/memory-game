@@ -1,31 +1,28 @@
 import React from 'react';
 import { Card } from '../../types';
-import {
-  StyledBackImg,
-  StyledSingleCard,
-  StyledFrontImg,
-} from './SingleCard.styles';
+import { StyledSingleCard, StyledSingleCardWrapper } from './SingleCard.styles';
 
 interface Props {
   card: Card;
   onClick: (card: Card) => void;
+  flipped: boolean;
 }
 
-const SingleCard = ({ card, onClick }: Props) => {
+const SingleCard = ({ card, onClick, flipped }: Props) => {
   const handleClick = () => {
     onClick(card);
   };
-
   return (
     <StyledSingleCard>
-      <div>
-        <StyledFrontImg src={card.src} alt="card front" />
-        <StyledBackImg
+      <StyledSingleCardWrapper flipped={flipped}>
+        <img className="front" src={card.src} alt="card front" />
+        <img
+          className="back"
           src="/img/cover.png"
           alt="card back"
           onClick={handleClick}
         />
-      </div>
+      </StyledSingleCardWrapper>
     </StyledSingleCard>
   );
 };

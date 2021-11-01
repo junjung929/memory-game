@@ -33,8 +33,12 @@ const Board = (props: Props) => {
             card.src === choiceOne.src ? { ...card, matched: true } : card
           );
         });
+        resetTurn();
+      } else {
+        setTimeout(() => {
+          resetTurn();
+        }, 1000);
       }
-      resetTurn();
     }
   }, [choiceOne, choiceTwo]);
 
@@ -44,8 +48,6 @@ const Board = (props: Props) => {
     setTurns((prevTurns) => prevTurns + 1);
   };
 
-  console.log(cards);
-
   return (
     <div>
       <h1>Magic Match</h1>
@@ -53,7 +55,12 @@ const Board = (props: Props) => {
       <CardGrid
         cards={cards}
         renderCard={(card) => (
-          <SingleCard key={card.id} card={card} onClick={handleChoice} />
+          <SingleCard
+            key={card.id}
+            card={card}
+            onClick={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+          />
         )}
       />
     </div>

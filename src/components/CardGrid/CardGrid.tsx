@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Card } from '../../types';
-import SingleCard from '../SingleCard/SingleCard';
 import { StyledCardGrid } from './CardGrid.styles';
 
 interface Props {

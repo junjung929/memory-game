@@ -28,9 +28,11 @@ const Board = (props: Props) => {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
-        console.log('those cards match');
-      } else {
-        console.log('those cards do not match');
+        setCards((prevCards) => {
+          return prevCards.map((card) =>
+            card.src === choiceOne.src ? { ...card, matched: true } : card
+          );
+        });
       }
       resetTurn();
     }
@@ -41,6 +43,8 @@ const Board = (props: Props) => {
     setChoiceTwo(null);
     setTurns((prevTurns) => prevTurns + 1);
   };
+
+  console.log(cards);
 
   return (
     <div>

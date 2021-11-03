@@ -10,10 +10,13 @@ export const StyledSingleCard = styled.div({
   },
   '& .front': {
     transform: 'rotateY(90deg)',
+    transition: 'all ease-in 0.2s',
     position: 'absolute',
   },
   '& .back': {
     cursor: 'pointer',
+    transition: 'all ease-in 0.2s',
+    transitionDelay: '0.2s',
   },
 });
 
@@ -24,6 +27,11 @@ export const StyledSingleCardWrapper = styled.div<{
     flipped && {
       '& .front': {
         transform: 'rotateY(0deg)',
+        transitionDelay: '0.2s',
+      },
+      '& .back': {
+        transform: 'rotateY(90deg)',
+        transitionDelay: '0s',
       },
     }
 );

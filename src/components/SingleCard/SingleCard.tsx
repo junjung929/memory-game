@@ -6,12 +6,14 @@ interface Props {
   card: Card;
   onClick: (card: Card) => void;
   flipped: boolean;
+  disabled: boolean;
 }
 
-const SingleCard = ({ card, onClick, flipped }: Props) => {
+const SingleCard = ({ card, onClick, flipped, disabled }: Props) => {
   const handleClick = () => {
-    onClick(card);
+    !disabled && onClick(card);
   };
+
   return (
     <StyledSingleCard>
       <StyledSingleCardWrapper flipped={flipped}>

@@ -13,6 +13,7 @@ const Board = (props: Props) => {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState<Card | null>(null);
   const [choiceTwo, setChoiceTwo] = useState<Card | null>(null);
+  const [disabled, setDisabled] = useState(false);
 
   const handleStart = useCallback(() => {
     const shuffledCards = shuffleCards(cardImages);
@@ -27,6 +28,7 @@ const Board = (props: Props) => {
   // compare 2 selected cards
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      setDisabled(true);
       if (choiceOne.src === choiceTwo.src) {
         setCards((prevCards) => {
           return prevCards.map((card) =>
@@ -46,6 +48,7 @@ const Board = (props: Props) => {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns((prevTurns) => prevTurns + 1);
+    setDisabled(false);
   };
 
   return (
@@ -60,6 +63,7 @@ const Board = (props: Props) => {
             card={card}
             onClick={handleChoice}
             flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
           />
         )}
       />

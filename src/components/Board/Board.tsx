@@ -17,6 +17,9 @@ const Board = (props: Props) => {
 
   const handleStart = useCallback(() => {
     const shuffledCards = shuffleCards(cardImages);
+
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   }, []);
@@ -51,6 +54,10 @@ const Board = (props: Props) => {
     setDisabled(false);
   };
 
+  useEffect(() => {
+    handleStart();
+  }, [handleStart]);
+
   return (
     <div>
       <h1>Magic Match</h1>
@@ -67,6 +74,7 @@ const Board = (props: Props) => {
           />
         )}
       />
+      <p>Turns: {turns}</p>
     </div>
   );
 };
